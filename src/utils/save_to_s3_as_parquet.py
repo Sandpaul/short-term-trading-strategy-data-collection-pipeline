@@ -34,8 +34,6 @@ def save_to_s3_as_parquet(data_dict, bucket_name):
             Key=s3_key,
         )
 
-        print(f"Successfully saved {s3_key} to bucket {bucket_name}")
-
     except TypeError as te:
         raise te
 
