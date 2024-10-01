@@ -2,8 +2,6 @@
 
 import yfinance as yf
 
-from src.utils.save_to_s3_as_parquet import save_to_s3_as_parquet
-
 
 def extract_data(symbol, interval):
     """Extracts one day's worth of data from the Yahoo Finance API.
