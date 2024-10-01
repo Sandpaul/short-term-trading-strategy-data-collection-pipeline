@@ -26,7 +26,11 @@ def test_extract_data(mock_download):
 
     result = extract_data(symbol, interval)
 
-    assert isinstance(result, pd.DataFrame)
+    assert isinstance(result, dict)
+    assert isinstance(result["date"], str)
+    assert isinstance(result["data"], pd.DataFrame)
+    assert isinstance(result["symbol"], str)
+    assert isinstance(result["interval"], str)
     mock_download.assert_called_once_with(tickers=symbol, period='1d', interval=interval)
 
 

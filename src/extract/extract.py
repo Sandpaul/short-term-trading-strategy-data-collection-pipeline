@@ -22,7 +22,14 @@ def extract_data(symbol, interval):
         if data.empty:
             raise ValueError(f"No data found for symbol: {symbol} with interval: {interval}")
 
-        return data
+        date = data.index[0].strftime('%Y-%m-%d')
+
+        return {
+            "symbol": symbol,
+            "interval": interval,
+            "date": date,
+            "data": data
+        }
 
     except ValueError:
         raise
@@ -34,3 +41,4 @@ if __name__ == "__main__":
     dow_1min_data = extract_data('^DJI', '1m')
     dow_15min_data = extract_data('^DJI', '15m')
     dow_1hr_data = extract_data('^DJI', '1h')
+    print(dow_1min_data)
