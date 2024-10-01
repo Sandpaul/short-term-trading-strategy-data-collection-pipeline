@@ -5,3 +5,7 @@ resource "aws_s3_bucket" "ingestion_bucket" {
         prevent_destroy = true
     }
 }
+
+resource "aws_s3_bucket" "lambda_bucket" {
+    bucket = "lambda-deployment-bucket"
+}
