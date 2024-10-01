@@ -15,8 +15,8 @@ resource "aws_iam_role" "extract_lambda_exec_role" {
 }
 
 resource "aws_iam_policy" "extract_lambda_s3_policy" {
-  name = "lambda_s3_policy"
-  description = "IAM policy for extract Lambda to access s3"
+  name        = "lambda_s3_policy"
+  description = "IAM policy for extract Lambda to access S3"
 
   policy = jsonencode({
     "Version": "2012-10-17",
@@ -34,6 +34,31 @@ resource "aws_iam_policy" "extract_lambda_s3_policy" {
 }
 
 resource "aws_iam_role_policy_attachment" "extract_lambda_s3_policy_attach" {
-  role = aws_iam_role.extract_lambda_exec_role.name
+  role       = aws_iam_role.extract_lambda_exec_role.name
   policy_arn = aws_iam_policy.extract_lambda_s3_policy.arn
+}
+
+resource "aws_iam_policy" "extract_lambda_ecr_policy" {
+  name        = "lambda_ecr_policy"
+  description = "IAM policy for extract Lambda to access ECR"
+
+  policy = jsonencode({
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Action": [
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:BatchGetImage",
+          "ecr:GetAuthorizationToken"
+        ],
+        "Resource": "*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "extract_lambda_ecr_policy_attach" {
+  role       = aws_iam_role.extract_lambda_exec_role.name
+  policy_arn = aws_iam_policy.extract_lambda_ecr_policy.arn
 }
