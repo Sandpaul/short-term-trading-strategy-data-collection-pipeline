@@ -17,5 +17,5 @@ def extract_data(symbol, interval):
 
 if __name__ == "__main__":
     dow_1min_data = extract_data('^DJI', '1m')
-    print(dow_1min_data)
-    print(type(dow_1min_data))
+    dow_15min_data = extract_data('^DJI', '15m')
+    dow_1hr_data = extract_data('^DJI', '1h')
