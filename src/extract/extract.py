@@ -11,9 +11,24 @@ def extract_data(symbol, interval):
 
     Returns:
         dataFrame: a dataFrame of the retrieved data
+    
+    Raises:
+        ValueError: if no data is returned
+        Exception: if there is an issue with the API call
     """
-    data = yf.download(tickers=symbol, period='1d', interval=interval)
-    return data
+    try:
+        data = yf.download(tickers=symbol, period='1d', interval=interval)
+
+        if data.empty:
+            raise ValueError(f"No data found for symbol: {symbol} with interval: {interval}")
+
+        return data
+
+    except ValueError:
+        raise
+    except Exception as e:
+        raise Exception(f"Error fetching data for {symbol} at interval {interval}: {e}") from e
+
 
 if __name__ == "__main__":
     dow_1min_data = extract_data('^DJI', '1m')
