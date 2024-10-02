@@ -94,11 +94,11 @@ jobs:
             
             - name: Tag Docker image
               run: |
-                docker tag extract-function:latest 339712945613.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/extract-function-repo:latest
+                docker tag extract-function:latest 339712945613.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/short_term_trading_data_pipeline_ecr:latest
         
             - name: Push Docker image
               run: |
-                docker push 339712945613.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/extract-function-repo:latest
+                docker push 339712945613.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/short_term_trading_data_pipeline_ecr:latest
     
     deploy:
         runs-on: ubuntu-latest
