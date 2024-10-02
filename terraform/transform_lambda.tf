@@ -5,6 +5,7 @@ resource "aws_lambda_function" "transform_lambda" {
 
   role = aws_iam_role.transform_lambda_exec_role.arn
   timeout = 300
+  memory_size = 1024
 }
 
 resource "aws_s3_bucket_notification" "transform_lambda_trigger" {
