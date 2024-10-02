@@ -1,7 +1,7 @@
 resource "aws_lambda_function" "extract_lambda" {
   function_name = "extract_lambda"
-
   image_uri = aws_ecr_repository.container_repo.repository_url
+  package_type = "Image"
   
   role = aws_iam_role.extract_lambda_exec_role.arn
 }
