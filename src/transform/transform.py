@@ -16,7 +16,7 @@ def transform_and_clean_data(df):
     columns_to_round = ["Open", "High", "Low", "Close"]
     transformed_df[columns_to_round] = transformed_df[columns_to_round].round(2)
 
-    transformed_df = transformed_df.rename_axis('datetime')
-    transformed_df.columns = ['open', 'high', 'low', 'close', 'volume']
+    transformed_df = transformed_df.rename_axis("datetime")
+    transformed_df.columns = ["open", "high", "low", "close", "volume"]
 
     return transformed_df

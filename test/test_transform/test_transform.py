@@ -18,7 +18,9 @@ def sample_data():
         "Volume": [0, 1527434, 1529194],
         "Adj Close": [42287.621094, 42200.648438, 42259.398438],
     }
-    index = pd.to_datetime(['2024-09-25 09:30:00', '2024-09-25 09:31:00', '2024-09-25 09:32:00'])
+    index = pd.to_datetime(
+        ["2024-09-25 09:30:00", "2024-09-25 09:31:00", "2024-09-25 09:32:00"]
+    )
     df = pd.DataFrame(data, index=index)
     return df
 
@@ -29,7 +31,9 @@ def test_transform_and_clean_data_drops_adj_close(sample_data):
     assert list(result.columns) == expected_columns
 
 
-def test_transform_and_clean_data_rounds_numeric_columns_and_renames_columns(sample_data):
+def test_transform_and_clean_data_rounds_numeric_columns_and_renames_columns(
+    sample_data,
+):
     result = transform_and_clean_data(sample_data)
     expected_data = {
         "open": [42236.09, 42295.76, 42198.68],
@@ -78,4 +82,17 @@ def test_transform_and_clean_data_drops_nan_values(sample_data):
 
 def test_transform_and_clean_data_renames_index(sample_data):
     result = transform_and_clean_data(sample_data)
-    assert result.index.name == 'datetime'
+    assert result.index.name == "datetime"
+
+
+def test_transform_and_clean_data_returns_new_dataframe(sample_data):
+    result = transform_and_clean_data(sample_data)
+    assert result is not sample_data
+
+
+def test_transform_and_clean_data_does_not_mutate_input(sample_data):
+    original_data = sample_data.copy()
+
+    transform_and_clean_data(sample_data)
+
+    pd.testing.assert_frame_equal(sample_data, original_data, check_dtype=True)
