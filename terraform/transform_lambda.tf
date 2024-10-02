@@ -4,6 +4,7 @@ resource "aws_lambda_function" "transform_lambda" {
   package_type = "Image"
 
   role = aws_iam_role.transform_lambda_exec_role.arn
+  timeout = 300
 }
 
 resource "aws_s3_bucket_notification" "transform_lambda_trigger" {

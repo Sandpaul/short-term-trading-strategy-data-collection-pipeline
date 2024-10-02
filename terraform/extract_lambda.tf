@@ -4,6 +4,7 @@ resource "aws_lambda_function" "extract_lambda" {
   package_type = "Image"
   
   role = aws_iam_role.extract_lambda_exec_role.arn
+  timeout = 300
 }
 
 # resource "aws_cloudwatch_event_rule" "extract_daily_trigger" {
