@@ -90,15 +90,15 @@ jobs:
 
             - name: Build Docker image
               run: |
-                docker build -t extract-function src/extract
+                docker build -t extract-function src/extract/Dockerfile .
             
             - name: Tag Docker image
               run: |
-                docker tag extract-function:latest 339712945613.dkr.ecr.eu-west-2.amazonaws.com/extract-function-repo:latest
+                docker tag extract-function:latest 339712945613.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/extract-function-repo:latest
         
             - name: Push Docker image
               run: |
-                docker push 339712945613.dkr.ecr.eu-west-2.amazonaws.com/extract-function-repo:latest
+                docker push 339712945613.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/extract-function-repo:latest
     
     deploy:
         runs-on: ubuntu-latest
