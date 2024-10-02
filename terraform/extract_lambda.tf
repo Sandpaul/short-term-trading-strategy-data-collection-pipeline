@@ -6,10 +6,16 @@ resource "aws_lambda_function" "extract_lambda" {
   role = aws_iam_role.extract_lambda_exec_role.arn
 }
 
+# resource "aws_cloudwatch_event_rule" "extract_daily_trigger" {
+#   name = "daily_lambda_trigger"
+#   description = "Triggers the extract Lambda function daily at midnight US Eastern Time"
+#   schedule_expression = "cron(0 5 * * ? *)"
+# }
+
 resource "aws_cloudwatch_event_rule" "extract_daily_trigger" {
   name = "daily_lambda_trigger"
   description = "Triggers the extract Lambda function daily at midnight US Eastern Time"
-  schedule_expression = "cron(0 5 * * ? *)"
+  schedule_expression = "rate(5 minutes)"
 }
 
 resource "aws_cloudwatch_event_target" "extract_lambda_trigger" {
