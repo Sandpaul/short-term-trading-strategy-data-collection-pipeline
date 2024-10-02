@@ -41,6 +41,8 @@ jobs:
 
     run-tests:
             runs-on: ubuntu-latest
+            env:
+                PYTHONPATH: ${{ github.workspace }}
             steps:
                 - name: Checkout Repo
                   uses: actions/checkout@v4
@@ -58,8 +60,6 @@ jobs:
                     pip install -r src/extract/requirements.txt 
                 
                 - name: Run Pytest
-                  env:
-                    PYTHONPATH: ./src
                   run: |
                     source venv/bin/activate
                     pytest -v   
