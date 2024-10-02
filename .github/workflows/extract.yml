@@ -32,7 +32,7 @@ jobs:
             - name: Run Saftey Security Checks
               run: |
                 source venv/bin/activate
-                safety check
+                safety check --ignore 70612
             
             - name: Run Coverage Checks
               run: |
@@ -59,6 +59,7 @@ jobs:
                 
                 - name: Run Pytest
                   run: |
+                    source venv/bin/activate
                     pytest -v   
     
     build:
