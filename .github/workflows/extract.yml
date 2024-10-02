@@ -116,7 +116,12 @@ jobs:
             
             - name: Terraform Init
               working-directory: terraform
-              run: terraform init
+              run: |
+                if [ ! -d ".terraform" ]; then
+                  terraform init
+                else
+                  echo "Terraform already initialised"
+                fi
             
             - name: Terraform Plan
               working-directory: terraform
