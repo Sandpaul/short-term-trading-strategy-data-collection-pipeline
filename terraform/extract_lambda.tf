@@ -9,7 +9,7 @@ resource "aws_lambda_function" "extract_lambda" {
 resource "aws_cloudwatch_event_rule" "extract_daily_trigger" {
   name = "daily_lambda_trigger"
   description = "Triggers the extract Lambda function daily"
-  schedule_expression = "rate(1 day)"
+  schedule_expression = "rate(5 minutes)"
 }
 
 resource "aws_cloudwatch_event_target" "extract_lambda_trigger" {
