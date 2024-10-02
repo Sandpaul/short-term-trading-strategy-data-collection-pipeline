@@ -2,8 +2,11 @@ name: Build and Push Extract Pipeline
 
 on:
     push:
-        branches:
-            - main
+        paths:
+          - 'src/extract/**'
+          - 'src/utils/**'
+          - 'terraform/extract**'
+          - '.github/workflows/extract.yml'
 
 env:
     AWS_REGION: eu-west-2
