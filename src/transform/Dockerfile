@@ -1,6 +1,6 @@
 # transform/Dockerfile
 
-FROM python:3.12.5-slim
+FROM public.ecr.aws/lambda/python:3.11
 
 WORKDIR /app
 
@@ -13,4 +13,4 @@ COPY src/utils/ /app/src/utils/
 
 ENV PYTHONPATH=/app/src
 
-CMD ["python", "-m", "transform.transform_and_save_data"]
+CMD ["transform.transform_and_save_data.transform_and_save_data"]
