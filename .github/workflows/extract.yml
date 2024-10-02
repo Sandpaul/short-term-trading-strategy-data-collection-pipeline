@@ -90,7 +90,7 @@ jobs:
 
             - name: Build Docker image
               run: |
-                docker build -t extract-function src/extract/Dockerfile .
+                docker build -t extract-function -f src/extract/Dockerfile .
             
             - name: Tag Docker image
               run: |
