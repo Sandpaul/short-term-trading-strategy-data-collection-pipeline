@@ -1,0 +1,15 @@
+{
+    "Records": [
+      {
+        "s3": {
+          "bucket": {
+            "name": "ingestion-bucket-st-trading-strategy-data-collection-pipeline"
+          },
+          "object": {
+            "key": "^DJI_1m/2024-10-02.parquet"
+          }
+        }
+      }
+    ]
+  }
+  
