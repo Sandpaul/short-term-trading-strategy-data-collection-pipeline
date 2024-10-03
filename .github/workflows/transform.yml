@@ -97,11 +97,11 @@ jobs:
 
             - name: Tag Docker image
               run: |
-                docker tag transform-function:latest 339712945613.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/short_term_trading_data_pipeline_ecr:latest
+                docker tag transform-function:latest 339712945613.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/short_term_trading_data_pipeline_ecr:transform-latest
             
             - name: Push Docker image
               run: |
-                docker push 339712945613.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/short_term_trading_data_pipeline_ecr:latest
+                docker push 339712945613.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/short_term_trading_data_pipeline_ecr:transform-latest
     
     deploy:
         runs-on: ubuntu-latest

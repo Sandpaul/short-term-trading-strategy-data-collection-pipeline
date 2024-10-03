@@ -1,6 +1,6 @@
 resource "aws_lambda_function" "transform_lambda" {
   function_name = "transform_lambda"
-  image_uri = "${aws_ecr_repository.container_repo.repository_url}:latest"
+  image_uri = "${aws_ecr_repository.container_repo.repository_url}:transform-latest"
   package_type = "Image"
 
   role = aws_iam_role.transform_lambda_exec_role.arn
