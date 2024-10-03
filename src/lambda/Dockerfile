@@ -15,4 +15,4 @@ COPY src/lambda/ /app/src/lambda/
 ENV PYTHONPATH=/app/src
 
 # Set the CMD to invoke the correct Lambda handler
-CMD ["python", "-m", "lambda.lambda_function.lambda_handler"]
+CMD ["python", "-m", "lambda.lambda_function"]
