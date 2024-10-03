@@ -10,8 +10,8 @@ WORKDIR /app
 COPY transform/requirements.txt ./transform/requirements.txt
 RUN pip install --no-cache-dir -r ./transform/requirements.txt
 
-COPY transform/ /app/src/transform/
-COPY ../utils/ /app/src/utils/
+COPY src/transform/ /app/src/transform/
+COPY src/utils/ /app/src/utils/
 
 ENV PYTHONPATH=/app/src
 
