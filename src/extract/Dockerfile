@@ -13,4 +13,4 @@ COPY src/utils/ /app/src/utils/
 
 ENV PYTHONPATH=/app/src
 
-CMD ["extract.extract_and_save_data.extract_and_save_data"]
+CMD ["python", "-m", "extract.extract_and_save_data"]
