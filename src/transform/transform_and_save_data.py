@@ -10,7 +10,10 @@ def transform_and_save_data(event, context):
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
 
+    logger.info("Function started.")
+
     try:
+        logger.info("Processing event: %s", event)
         bucket_name = event["Records"][0]["s3"]["bucket"]["name"]
         file_name = event["Records"][0]["s3"]["object"]["key"]
         formatted_file_name = file_name.replace("%3A", "")
