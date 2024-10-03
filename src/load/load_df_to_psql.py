@@ -27,20 +27,3 @@ def load_df_to_psql(df, table_name):
 
     finally:
         engine.dispose()
-
-
-def sample_df():
-    data = {
-        "open": [100.0, 101.0],
-        "high": [105.0, 106.0],
-        "low": [95.0, 96.0],
-        "close": [102.0, 103.0],
-        "volume": [1000, 1500],
-    }
-    return pd.DataFrame(data, index=pd.date_range("2024-10-01", periods=2, freq="min"))
-
-
-df = sample_df()
-
-load_df_to_psql(df, "^DJI-1m")
-load_df_to_psql(df, "^DJI-3m")
