@@ -1,8 +1,20 @@
+import os
+import logging
+
 from src.extract.extract import extract_data
 from src.utils.save_to_s3_as_parquet import save_to_s3_as_parquet
 
 
 def extract_and_save_data(symbol, intervals, bucket_name):
+
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger()
+
+    logger.info(f"PYTHONPATH: {os.environ.get('PYTHONPATH')}")
+
+    src_path = '/app/src'
+    logger.info(f"Directory contents of '{src_path}': {os.listdir(src_path)}")
+
 
     for interval in intervals:
         try:
@@ -15,7 +27,8 @@ def extract_and_save_data(symbol, intervals, bucket_name):
             )
 
         except Exception as e:
-            print(f"Error processing data for {symbol} at {interval} interval: {e}")
+            logger.error(f"Error processing data for {symbol} at {interval} interval: {e}")
+            raise e
 
 
 if __name__ == "__main__":
