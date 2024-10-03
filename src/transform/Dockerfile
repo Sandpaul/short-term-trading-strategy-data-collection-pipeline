@@ -7,8 +7,8 @@ RUN chmod +x /usr/local/bin/aws-lambda-rie
 
 WORKDIR /app
 
-COPY transform/requirements.txt ./transform/requirements.txt
-RUN pip install --no-cache-dir -r ./transform/requirements.txt
+COPY src/transform/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src/transform/ /app/src/transform/
 COPY src/utils/ /app/src/utils/
