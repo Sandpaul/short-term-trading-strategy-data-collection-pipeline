@@ -23,7 +23,8 @@ resource "aws_iam_policy" "transform_lambda_s3_policy" {
     "Statement": [
         {
             "Action": [
-                "s3:GetObject"
+                "s3:GetObject",
+                "s3:ListBucket"
             ],
             "Effect": "Allow",
             "Resource": "arn:aws:s3:::ingestion-bucket-st-trading-strategy-data-collection-pipeline/*"
