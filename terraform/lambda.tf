@@ -15,7 +15,7 @@ resource "aws_s3_bucket_notification" "lambda_trigger" {
   }
 }
 
-resource "aws_lambda_permission" "allow_s3_transform" {
+resource "aws_lambda_permission" "allow_s3_lambda" {
   action = "lambda:InvokeFunction"
   function_name = "lambda"
   principal = "s3.amazonaws.com"
