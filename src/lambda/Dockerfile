@@ -1,11 +1,18 @@
-# lambda Dockerfile
+# lambda/Dockerfile
 
-# Dockerfile
+FROM python:3.12.5-slim
 
-FROM public.ecr.aws/lambda/python:3.11
+WORKDIR /app
+
+# Copy and install requirements
+COPY src/lambda/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the function code
-COPY lambda_function.py ${LAMBDA_TASK_ROOT}
+COPY src/lambda/ /app/src/lambda/
 
-# Command can be overwritten by providing a different command in the template.yaml
-CMD ["lambda_function.lambda_handler"]
+# Set the PYTHONPATH to include the src directory
+ENV PYTHONPATH=/app/src
+
+# Set the CMD to invoke the correct Lambda handler
+CMD ["python", "-m", "lambda.lambda_function.lambda_handler"]
