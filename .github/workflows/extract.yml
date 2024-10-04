@@ -45,7 +45,8 @@ jobs:
             - name: Run Coverage Checks
               run: |
                 source venv/bin/activate
-                coverage run --source=src/extract,src/utils/save_to_s3_as_parquet.py --omit 'venv/*' -m pytest && coverage report -m
+                coverage run --source=src/extract,src/utils/save_to_s3_as_parquet.py --omit 'venv/*' -m pytest test/test_extract test/test_utils/test_save_to_s3_as_parquet.py
+                coverage report -m
 
     run-tests:
             runs-on: ubuntu-latest
@@ -70,7 +71,7 @@ jobs:
                 - name: Run Pytest
                   run: |
                     source venv/bin/activate
-                    pytest -v test/test_extract test/test_utils/save_to_s3_as_parquet.py --ignore=test/test_load
+                    pytest -v test/test_extract test/test_utils/test_save_to_s3_as_parquet.py
     
     build:
         runs-on: ubuntu-latest
