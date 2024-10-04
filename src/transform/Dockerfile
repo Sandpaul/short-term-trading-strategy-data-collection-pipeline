@@ -1,13 +1,14 @@
 # Define custom function directory
-ARG FUNCTION_DIR="/app"
+ARG FUNCTION_DIR="/function"
 
 # Stage 1: Build the image
-FROM public.ecr.aws/lambda/python:3.12 as build-image
+FROM python:3.12 as build-image
 
 # Include global arg in this stage of the build
 ARG FUNCTION_DIR
 
-# Set the working directory
+# Create the function directory
+RUN mkdir -p ${FUNCTION_DIR}
 WORKDIR ${FUNCTION_DIR}
 
 # Copy the requirements file and install dependencies
@@ -20,8 +21,8 @@ RUN pip install --no-cache-dir awslambdaric
 # Copy the application code
 COPY src/transform/ ${FUNCTION_DIR}/src/transform/
 
-# Stage 2: Create a slim image
-FROM public.ecr.aws/lambda/python:3.12-slim
+# Stage 2: Create the final image
+FROM python:3.12-slim
 
 # Include global arg in this stage of the build
 ARG FUNCTION_DIR
@@ -36,4 +37,4 @@ COPY --from=build-image ${FUNCTION_DIR} ${FUNCTION_DIR}
 ENTRYPOINT [ "/usr/local/bin/python", "-m", "awslambdaric" ]
 
 # Pass the name of the function handler as an argument to the runtime
-CMD [ "transform_and_save_data.transform_and_save_data" ]
+CMD [ "src.transform.transform_and_save_data.transform_and_save_data" ]
