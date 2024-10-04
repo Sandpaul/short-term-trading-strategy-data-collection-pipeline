@@ -1,6 +1,6 @@
-# lambda/Dockerfile
+# transform/Dockerfile
 
-FROM python:3.12.5-slim
+FROM public.ecr.aws/lambda/python:3.9
 
 WORKDIR /app
 
@@ -9,6 +9,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src/transform/ /app/src/transform/
 
-ENV PYTHONPATH=/app/src
-
-CMD ["python", "-m", "transform.transform_and_save_data"]
+CMD ["transform_and_save_data.transform_and_save_data"]
