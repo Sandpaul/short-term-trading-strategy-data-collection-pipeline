@@ -7,6 +7,8 @@ terraform {
     bucket = "terraform-state-bucket-trading-data-collection-pipeline"
     key = "terraform.tfstate"
     region = "eu-west-2"
+    dynamodb_table = "lock-table-st-trading-data-collection-pipeline"
+    encrypt = true
   }
   
   required_providers {
