@@ -4,7 +4,7 @@ on:
     push:
         paths:
           - 'src/extract/**'
-          - 'src/utils/**'
+          - 'src/utils/save_to_s3_as_parquet**'
           - 'terraform/extract**'
           - '.github/workflows/extract.yml'
 
@@ -35,17 +35,17 @@ jobs:
             - name: Run Bandit Security Checks
               run: |
                 source venv/bin/activate
-                bandit -r src/
+                bandit -r src/extract src/utils/save_to_s3_as_parquet.py
             
             - name: Run Saftey Security Checks
               run: |
                 source venv/bin/activate
-                safety check --ignore 70612
+                safety check --ignore 70612 --file src/extract/requirements.txt
             
             - name: Run Coverage Checks
               run: |
                 source venv/bin/activate
-                coverage run --omit 'venv/*' -m pytest && coverage report -m
+                coverage run --source=src/extract,src/utils/save_to_s3_as_parquet.py --omit 'venv/*' -m pytest && coverage report -m
 
     run-tests:
             runs-on: ubuntu-latest
