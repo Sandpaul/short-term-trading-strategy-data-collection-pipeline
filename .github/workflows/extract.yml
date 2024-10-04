@@ -118,7 +118,7 @@ jobs:
                 aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
             
             - name: Terraform Init
-              working-directory: terraform
+              working-directory: terraform/extract
               run: |
                 if [ ! -d ".terraform" ]; then
                   terraform init
@@ -127,9 +127,9 @@ jobs:
                 fi
             
             - name: Terraform Plan
-              working-directory: terraform
+              working-directory: terraform/extract
               run: terraform plan
       
             - name: Terraform Apply
-              working-directory: terraform
+              working-directory: terraform/extract
               run: terraform apply -auto-approve
