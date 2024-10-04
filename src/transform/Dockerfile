@@ -1,40 +1,16 @@
-# Define custom function directory
-ARG FUNCTION_DIR="/function"
+# transform/Dockerfile
 
-# Stage 1: Build the image
-FROM python:3.12 as build-image
+FROM python:3.12.5-slim
 
-# Include global arg in this stage of the build
-ARG FUNCTION_DIR
+WORKDIR /app
 
-# Create the function directory
-RUN mkdir -p ${FUNCTION_DIR}
-WORKDIR ${FUNCTION_DIR}
+COPY src/transform/requirements.txt .
 
-# Copy the requirements file and install dependencies
-COPY src/transform/requirements.txt ${FUNCTION_DIR}/requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install the AWS Lambda Runtime Interface Client
-RUN pip install --no-cache-dir awslambdaric
+COPY src/transform/ /app/src/transform/
+COPY src/utils/ /app/src/utils/
 
-# Copy the application code
-COPY src/transform/ ${FUNCTION_DIR}/src/transform/
+ENV PYTHONPATH=/app/src
 
-# Stage 2: Create the final image
-FROM python:3.12-slim
-
-# Include global arg in this stage of the build
-ARG FUNCTION_DIR
-
-# Set working directory to function root directory
-WORKDIR ${FUNCTION_DIR}
-
-# Copy in the built dependencies from the previous stage
-COPY --from=build-image ${FUNCTION_DIR} ${FUNCTION_DIR}
-
-# Set runtime interface client as the default command for the container runtime
-ENTRYPOINT [ "/usr/local/bin/python", "-m", "awslambdaric" ]
-
-# Pass the name of the function handler as an argument to the runtime
-CMD [ "src.transform.transform_and_save_data.transform_and_save_data" ]
+CMD ["python", "-m", "transform.transform_and_save_data"]
