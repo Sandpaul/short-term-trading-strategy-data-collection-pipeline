@@ -70,7 +70,7 @@ jobs:
                 - name: Run Pytest
                   run: |
                     source venv/bin/activate
-                    pytest -v test/test_extract test/test_utils/save_to_s3_as_parquet.py
+                    pytest -v test/test_extract test/test_utils/save_to_s3_as_parquet.py --ignore=test/test_load
     
     build:
         runs-on: ubuntu-latest
