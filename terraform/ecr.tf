@@ -6,3 +6,8 @@ resource "aws_ecr_repository" "container_repo" {
 output "repository_url" {
   value = aws_ecr_repository.container_repo.repository_url
 }
+
+module "extract" {
+  source         = "./extract"
+  repository_url = aws_ecr_repository.container_repo.repository_url
+}
