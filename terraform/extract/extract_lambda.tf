@@ -26,3 +26,4 @@ resource "aws_lambda_permission" "allow_cloudwatch_to_invoke_extract_lambda" {
   principal = "events.amazonaws.com"
   source_arn = aws_cloudwatch_event_rule.extract_daily_trigger.arn
 }
+#
