@@ -119,7 +119,7 @@ jobs:
                 aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
             
             - name: Terraform Init
-              working-directory: terraform
+              working-directory: terraform/transform
               run: |
                 if [ ! -d ".terraform" ]; then
                   terraform init
