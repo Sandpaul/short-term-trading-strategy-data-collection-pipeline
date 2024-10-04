@@ -9,4 +9,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src/transform/ /app/src/transform/
 
-CMD ["transform_and_save_data.transform_and_save_data"]
+CMD ["src.transform.transform_and_save_data.transform_and_save_data"]
