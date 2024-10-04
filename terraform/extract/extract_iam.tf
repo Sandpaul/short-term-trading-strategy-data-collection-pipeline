@@ -15,7 +15,7 @@ resource "aws_iam_role" "extract_lambda_exec_role" {
 }
 
 resource "aws_iam_policy" "extract_lambda_s3_policy" {
-  name        = "lambda_s3_policy"
+  name        = "extract_lambda_s3_policy"
   description = "IAM policy for extract Lambda to access S3"
 
   policy = jsonencode({
@@ -39,7 +39,7 @@ resource "aws_iam_role_policy_attachment" "extract_lambda_s3_policy_attach" {
 }
 
 resource "aws_iam_policy" "extract_lambda_ecr_policy" {
-  name        = "lambda_ecr_policy"
+  name        = "extract_lambda_ecr_policy"
   description = "IAM policy for extract Lambda to access ECR"
 
   policy = jsonencode({
