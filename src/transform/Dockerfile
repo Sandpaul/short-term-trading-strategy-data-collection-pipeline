@@ -2,7 +2,7 @@
 ARG FUNCTION_DIR="/app"
 
 # Stage 1: Build the image
-FROM public.ecr.aws/lambda/python:3.11 as build-image
+FROM public.ecr.aws/lambda/python:3.12 as build-image
 
 # Include global arg in this stage of the build
 ARG FUNCTION_DIR
@@ -21,7 +21,7 @@ RUN pip install --no-cache-dir awslambdaric
 COPY src/transform/ ${FUNCTION_DIR}/src/transform/
 
 # Stage 2: Create a slim image
-FROM public.ecr.aws/lambda/python:3.11-slim
+FROM public.ecr.aws/lambda/python:3.12-slim
 
 # Include global arg in this stage of the build
 ARG FUNCTION_DIR
