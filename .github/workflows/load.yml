@@ -45,7 +45,7 @@ jobs:
             - name: Run Coverage Checks
               run: |
                 source venv/bin/activate
-                coverage run --source=src/load,src/utils/read_parquet_from_s3.py --omit 'venv/*' -m pytest test/test_load test/test_utils/read_parquet_from_s3.py
+                coverage run --source=src/load,src/utils/read_parquet_from_s3.py --omit 'venv/*' -m pytest test/test_load test/test_utils/test_read_parquet_from_s3.py
                 coverage report -m
     
     run-tests:
@@ -71,7 +71,7 @@ jobs:
             - name: Run Pytest
               run: |
                 source venv/bin/activate
-                pytest -v test/test_load test/test_utils/read_parquet_from_s3.py
+                pytest -v test/test_load test/test_utils/test_read_parquet_from_s3.py
     
     build:
         runs-on: ubuntu-latest
